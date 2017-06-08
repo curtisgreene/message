@@ -21,7 +21,7 @@ class App extends Component {
       <div>
         <NavBar />
         <Switch>
-          <Route exact path='/signup' render={ () => <SignUpForm onSignUp={this.handleSignUp}/>} />
+          <Route path='/signup' render={ () => <SignUpForm onSignUp={this.handleSignUp}/>} />
           <Route path='/' component={ MainContainer} />
         </Switch>
       </div>

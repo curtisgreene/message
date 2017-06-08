@@ -31,6 +31,16 @@ export default class MenuExampleBasic extends Component {
             Profile
           </Menu.Item>
         </Link>
+
+        <Link to='/new-message'>
+          <Menu.Item
+            name='Write'
+            active={activeItem === 'write'}
+            onClick={this.handleItemClick}
+          >
+            Write
+          </Menu.Item>
+        </Link>
       </Menu>
     )
   }
