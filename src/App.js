@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import SignUpForm from './components/SignUpForm'
-import { createUser } from './api/index'
+import { createAccount, logIn } from './api/index'
 import MainContainer from './containers/MainContainer'
 import NavBar from './components/NavBar'
+import LogInForm from './components/LogInForm'
 
 class App extends Component {
   constructor(){
     super()
     this.handleSignUp = this.handleSignUp.bind(this)
+    this.handleLogIn = this.handleLogIn.bind(this)
   }
 
-  handleSignUp(username, profile){
-    createUser(username, profile)
+  handleSignUp(params){
+    createAccount(params)
     .then( res => console.log("res from API: ", res))
+  }
+
+  handleLogIn(params) {
+    logIn(params)
+    .then( res => {
+      localStorage.setItem('jwt', res.token)
+    })
+    .then( () => this.props.history.push('/'))
   }
 
   render() {
@@ -22,6 +32,7 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route path='/signup' render={ () => <SignUpForm onSignUp={this.handleSignUp}/>} />
+          <Route path='/login' render={ () => <LogInForm onLogIn={this.handleLogIn}/>} />
           <Route path='/' component={ MainContainer} />
         </Switch>
       </div>
@@ -29,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

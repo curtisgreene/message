@@ -15,7 +15,9 @@ function ArticlesList(props){
       </Item.Content>
     </Item>
   )
-
+  if (!props.articles) {
+    return null
+  }
   return (
     <div>
       <Header as='h2' icon textAlign='center'>
