@@ -10,38 +10,53 @@ export default class MenuExampleBasic extends Component {
   render() {
     const { activeItem } = this.state
 
-    return (
-      <Menu>
-        <Link to="/">
-          <Menu.Item
-            name='home'
-            active={activeItem === 'home'}
-            onClick={this.handleItemClick}
-          >
-            Home
-          </Menu.Item>
-        </Link>
+    if (!!localStorage.getItem('jwt')) {
+      return (
+        <Menu>
+          <Link to="/">
+            <Menu.Item
+              name='home'
+              active={activeItem === 'home'}
+              onClick={this.handleItemClick}
+            >
+              Home
+            </Menu.Item>
+          </Link>
 
-        <Link to='/signup'>
-          <Menu.Item
-            name='profile'
-            active={activeItem === 'profile'}
-            onClick={this.handleItemClick}
-          >
-            Profile
-          </Menu.Item>
-        </Link>
+          <Link to='/new-message'>
+            <Menu.Item
+              name='Write'
+              active={activeItem === 'write'}
+              onClick={this.handleItemClick}
+            >
+              Write
+            </Menu.Item>
+          </Link>
+        </Menu>
+      )} else {
+        return (
+          <Menu>
+            <Link to='/signup'>
+              <Menu.Item
+                name='signup'
+                active={activeItem === 'signup'}
+                onClick={this.handleItemClick}
+              >
+                Sign Up
+              </Menu.Item>
+            </Link>
+            <Link to='/login'>
+              <Menu.Item
+                name='login'
+                active={activeItem === 'login'}
+                onClick={this.handleItemClick}
+              >
+                Log In
+              </Menu.Item>
+            </Link>
+        </Menu>
+        )
+      }
 
-        <Link to='/new-message'>
-          <Menu.Item
-            name='Write'
-            active={activeItem === 'write'}
-            onClick={this.handleItemClick}
-          >
-            Write
-          </Menu.Item>
-        </Link>
-      </Menu>
-    )
   }
 }
