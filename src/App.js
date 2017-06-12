@@ -11,6 +11,8 @@ class App extends Component {
     super()
     this.handleSignUp = this.handleSignUp.bind(this)
     this.handleLogIn = this.handleLogIn.bind(this)
+    this.handleLogOut = this.handleLogOut.bind(this)
+
   }
 
   handleSignUp(params){
@@ -22,18 +24,23 @@ class App extends Component {
     logIn(params)
     .then( res => {
       localStorage.setItem('jwt', res.token)
+      localStorage.setItem('user', JSON.stringify(res.user))
     })
     .then( () => this.props.history.push('/'))
+  }
+
+  handleLogOut(){
+    localStorage.clear()
   }
 
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar handleLogOut={this.handleLogOut}/>
         <Switch>
           <Route path='/signup' render={ () => <SignUpForm onSignUp={this.handleSignUp}/>} />
           <Route path='/login' render={ () => <LogInForm onLogIn={this.handleLogIn}/>} />
-          <Route path='/' component={ MainContainer} />
+          <Route path='/' render={ () =>  <MainContainer />} />
         </Switch>
       </div>
     );
