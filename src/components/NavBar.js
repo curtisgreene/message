@@ -8,6 +8,7 @@ export default class MenuExampleBasic extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
+    const currentUser = JSON.parse(localStorage.getItem('user'))
     const { activeItem } = this.state
 
     if (!!localStorage.getItem('jwt')) {
@@ -32,6 +33,22 @@ export default class MenuExampleBasic extends Component {
               Write
             </Menu.Item>
           </Link>
+          <Link to={`/users/${currentUser.id}`}>
+            <Menu.Item
+              name='Write'
+              active={activeItem === 'profile'}
+              onClick={this.handleItemClick}
+            >
+              Profile
+            </Menu.Item>
+          </Link>
+          <Menu.Item
+            name='logout'
+            active={activeItem === 'logout'}
+            onClick={this.props.handleLogOut}
+          >
+            Log Out
+          </Menu.Item>
         </Menu>
       )} else {
         return (

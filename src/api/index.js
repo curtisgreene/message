@@ -21,6 +21,12 @@ export function logIn(params){
   }).then( res => res.json() )
 }
 
+export function fetchUser(id){
+  const url = "http://localhost:3000/api/v1/users/" + id
+  return fetch(url)
+  .then( res => res.json())
+}
+
 export function fetchArticles() {
   return fetch("http://localhost:3000/api/v1/articles", {
     headers: {
@@ -28,4 +34,17 @@ export function fetchArticles() {
     }
   })
   .then( res => res.json() )
+}
+
+export function createArticle(title, body, id){ //needs title
+  // console.log('trying to create article from the api/index')
+  return fetch("http://localhost:3000/api/v1/articles", {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
+    },
+    method: 'POST',
+    body: JSON.stringify( {article: {title: title, body: body, user_id: id}} )
+  }).then( res => res.json() )
 }
