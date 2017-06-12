@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
-
-
+  include ::ActionController::Serialization
+  
   private
 
   def authorize_account!

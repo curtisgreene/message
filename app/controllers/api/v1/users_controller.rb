@@ -10,6 +10,17 @@ class Api::V1::UsersController < ApplicationController
     render json: user
   end
 
+  def show
+    user = User.find(params[:id])
+    articles = Article.where(user_id: user.id)
+    render json: {
+      id: user.id,
+      username: user.username,
+      profile: user.profile,
+      articles: articles
+    }
+  end
+
 
   private
 
