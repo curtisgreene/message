@@ -12,8 +12,10 @@ export default class ArticleCard extends React.Component {
     if (!this.props.article) {
       return null
     } else {
-      const contentState = convertFromRaw(JSON.parse(this.props.article.body))
-      const editorState = EditorState.createWithContent(contentState)
+      const raw = JSON.parse(this.props.article.body)
+      const snippet = raw.blocks[0].text.substring(0, 100)
+      // const contentState = convertFromRaw(JSON.parse(this.props.article.body))
+      // const editorState = EditorState.createWithContent(contentState)
     return (
       <Item key={this.props.article.id}>
         <Item.Image size='small' src={require('../assets/missing-image.png')} />
@@ -21,7 +23,7 @@ export default class ArticleCard extends React.Component {
           <Link to={`/articles/${this.props.article.id}`}><Item.Header as='a'>{this.props.article.title}</Item.Header></Link><br/>
           <Link to={`/users/${this.props.article.user.id}`}><Item.Header as='a'>{this.props.article.user.username}</Item.Header></Link>
           <Item.Description>
-            <Editor editorState={editorState} readOnly="true" />
+            {snippet}...
           </Item.Description>
         </Item.Content>
       </Item>

@@ -1,39 +1,26 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
-import { fetchArticles, createArticle } from '../api/index'
-import MainPage from '../components/MainPage'
+import { withRouter, Switch, Route } from 'react-router-dom'
 import { Container } from 'semantic-ui-react'
+import ArticlesContainer from '../containers/ArticlesContainer'
+import UsersContainer from '../containers/UsersContainer'
 
 class MainContainer extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       articles: []
     }
-    this.handleCreateArticle = this.handleCreateArticle.bind(this)
-  }
-
-  componentDidMount(){
-    fetchArticles()
-    .then(res => this.setState({
-      articles: res.articles
-    }))
-  }
-
-  handleCreateArticle(title, body, id){
-    createArticle(title, body, id)
-    .then(res => console.log("response from the api: ", res) )
-    .then( () => this.props.history.push('/'))
   }
 
   render(){
     if (!!localStorage.getItem('jwt')){
     return (
-      <div>
-        <Container text>
-        <MainPage handleCreateArticle={this.handleCreateArticle} currentUser={this.props.currentUser} articles={this.state.articles} />
+      <Container text>
+        <Switch>
+          <Route path="/articles" render={ () => <ArticlesContainer /> } />
+          <Route path='/users' render={ () => <UsersContainer currentUser={this.props.currentUser}/> } />
+        </Switch>
       </Container>
-      </div>
     )} else {
       return <h1>YOU NEED TO SIGN UP OR IN</h1> ///this could be the landing/about page
     }

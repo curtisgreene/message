@@ -29,7 +29,8 @@ class App extends Component {
       localStorage.setItem('user', JSON.stringify(res.user))
       this.setState({ currentUser: res.user })
     })
-    .then( () => this.props.history.push('/'))
+    .then( () => this.props.history.push('/articles'))
+  
   }
 
   componentDidMount(){

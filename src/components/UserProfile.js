@@ -4,7 +4,7 @@ import FollowersModal from './FollowersModal'
 import FollowingModal from './FollowingModal'
 import CurrentUserProfile from './CurrentUserProfile'
 import { Link } from 'react-router-dom'
-import { Modal, Header, Button, Image, Icon } from 'semantic-ui-react'
+import { Button, Image, Icon } from 'semantic-ui-react'
 export default class UserProfile extends React.Component {
   constructor(props){
     super(props)
@@ -26,7 +26,7 @@ export default class UserProfile extends React.Component {
 
   handleFollowUser(){
     console.log("triyng to follow")
-    followUser(this.state.user.id)
+    followUser(this.state.user.id) //from api/index
     // .then( user => this.setState({ user: user }))
   }
 

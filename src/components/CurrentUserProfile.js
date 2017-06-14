@@ -8,8 +8,8 @@ export default class CurrentUserProfile extends React.Component {
     super(props)
     this.state = {
       user: {
-        username: this.props.username,
-        profile: this.props.profile
+        username: props.currentUser.username,
+        profile: props.currentUser.profile
       }
     }
   }
@@ -19,8 +19,8 @@ export default class CurrentUserProfile extends React.Component {
     return (
       <div>
         <h1>Welcome to your Profile Page!</h1>
-        <h3>{this.props.currentUser.username}</h3>
-        <p>{this.props.currentUser.profile}</p>
+        <h3>{this.state.user.username}</h3>
+        <p>{this.state.user.profile}</p>
         <FollowersModal user={this.props.currentUser}/>
         <FollowingModal user={this.props.currentUser}/>
       </div>
