@@ -1,6 +1,6 @@
 class ArticleSerializer < ActiveModel::Serializer
-  attributes :id, :body, :title
+  attributes :id, :body, :title, :user
 
-  has_one :user
+  # has_one :user
 
 end

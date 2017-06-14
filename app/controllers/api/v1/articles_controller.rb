@@ -18,4 +18,5 @@ class Api::V1::ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :user_id, :body)
   end
+
 end

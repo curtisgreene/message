@@ -1,5 +1,8 @@
 class Api::V1::UsersController < ApplicationController
 
+  # before_action :authorize_account!
+
+
   def index
     users = User.all
     render json: users
@@ -11,14 +14,16 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    user = User.find(params[:id])
-    articles = Article.where(user_id: user.id)
-    render json: {
-      id: user.id,
-      username: user.username,
-      profile: user.profile,
-      articles: articles
-    }
+    found_user = User.find(params[:id])
+    render json: found_user, root: nil
+  end
+
+  def new_follow
+    authorize_account!
+    to_be_followed = User.find(params[:id])
+    current_user = User.find_by(account_id: @current_account.id)
+    current_user.follow(to_be_followed)
+    render json: to_be_followed
   end
 
 

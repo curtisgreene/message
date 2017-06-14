@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :articles, only: [:index, :create]
       resources :accounts, only: [:index, :create]
       post '/auth', to: 'auth#create'
+      post '/follow/:id', to: 'users#new_follow'
     end
   end
 end

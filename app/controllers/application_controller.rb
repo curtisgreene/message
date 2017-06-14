@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   include ::ActionController::Serialization
-  
+
   private
 
   def authorize_account!
@@ -26,4 +26,6 @@ class ApplicationController < ActionController::API
   def token
     request.headers['Authorization']
   end
+
+
 end
