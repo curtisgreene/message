@@ -1,10 +1,10 @@
 class Api::V1::ArticlesController < ApplicationController
 
-  before_action :authorize_account!
+  # before_action :authorize_account!
 
   def index
-    articles = Article.all
-    render json: articles
+    @articles = Article.all
+    render json: @articles
   end
 
   def create
@@ -18,4 +18,5 @@ class Api::V1::ArticlesController < ApplicationController
   def article_params
     params.require(:article).permit(:title, :user_id, :body)
   end
+
 end
