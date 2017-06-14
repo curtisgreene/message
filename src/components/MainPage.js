@@ -10,7 +10,7 @@ function MainPage(props){
   return (
     <Switch>
       <Route exact path='/users/:id' render={ ({match}) => {
-        return <UserProfile user_id={match.params.id} />} } />
+        return <UserProfile currentUser={props.currentUser} user_id={match.params.id} />} } />
       <Route exact path="/articles/:id" render={ ({match}) => {
         const article = props.articles.find(article => article.id === parseInt(match.params.id))
         return <ArticleShow article={article} />

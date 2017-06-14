@@ -3,6 +3,7 @@ import {convertFromRaw,
         Editor,
         EditorState,
         createWithContent } from 'draft-js'
+import { Link } from 'react-router-dom'
 
 export default class ArticleShow extends React.Component {
 
@@ -16,7 +17,7 @@ export default class ArticleShow extends React.Component {
     return (
       <div>
         <h1>{this.props.article.title}</h1>
-        <h1>{this.props.article.user.username}</h1>
+        <Link to={`/users/${this.props.article.user.id}`}><h1>{this.props.article.user.username}</h1></Link>
         <Editor editorState={editorState} readOnly="true" />
       </div>
     )}

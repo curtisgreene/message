@@ -24,7 +24,7 @@ export function logIn(params){
 export function fetchUser(id){
   const url = "http://localhost:3000/api/v1/users/" + id
   return fetch(url)
-  .then( res => res.json())
+  .then( res => res.json() )
 }
 
 export function fetchArticles() {
@@ -47,4 +47,16 @@ export function createArticle(title, body, id){ //needs title
     method: 'POST',
     body: JSON.stringify( {article: {title: title, body: body, user_id: id}} )
   }).then( res => res.json() )
+}
+
+export function followUser(id){
+  const url = "http://localhost:3000/api/v1/follow/" + id
+  return fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
+    },
+    method: 'POST'
+    }).then( res => res.json() )
 }

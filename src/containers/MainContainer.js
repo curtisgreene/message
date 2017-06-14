@@ -13,7 +13,7 @@ class MainContainer extends React.Component {
     this.handleCreateArticle = this.handleCreateArticle.bind(this)
   }
 
-  componentWillMount(){
+  componentDidMount(){
     fetchArticles()
     .then(res => this.setState({
       articles: res.articles
@@ -31,7 +31,7 @@ class MainContainer extends React.Component {
     return (
       <div>
         <Container text>
-        <MainPage handleCreateArticle={this.handleCreateArticle} articles={this.state.articles} />
+        <MainPage handleCreateArticle={this.handleCreateArticle} currentUser={this.props.currentUser} articles={this.state.articles} />
       </Container>
       </div>
     )} else {
