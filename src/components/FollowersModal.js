@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { Popup, Button, Header, Image, Modal, Icon } from 'semantic-ui-react'
 
 export default class FollowersModal extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       open: false
     }

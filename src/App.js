@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom'
 import SignUpForm from './components/SignUpForm'
 import { createAccount, logIn, fetchUser } from './api/index'
-import MainContainer from './containers/MainContainer'
+import ArticlesContainer from './containers/ArticlesContainer'
+import UsersContainer from './containers/UsersContainer'
 import NavBar from './components/NavBar'
 import LogInForm from './components/LogInForm'
+import { Container } from 'semantic-ui-react'
 
 class App extends Component {
   constructor(){
@@ -30,7 +32,7 @@ class App extends Component {
       this.setState({ currentUser: res.user })
     })
     .then( () => this.props.history.push('/articles'))
-  
+
   }
 
   componentDidMount(){
@@ -48,11 +50,14 @@ class App extends Component {
     return (
       <div>
         <NavBar handleLogOut={this.handleLogOut}/>
+        <Container text>
         <Switch>
-          <Route path='/signup' render={ () => <SignUpForm onSignUp={this.handleSignUp}/>} />
-          <Route path='/login' render={ () => <LogInForm onLogIn={this.handleLogIn}/>} />
-          <Route path='/' render={ () =>  <MainContainer currentUser={this.state.currentUser}/>} />
+          <Route exact path='/signup' render={ () => <SignUpForm onSignUp={this.handleSignUp}/>} />
+          <Route exact path='/login' render={ () => <LogInForm onLogIn={this.handleLogIn}/>} />
+          <Route path="/articles" render={ () => <ArticlesContainer /> } />
+          <Route path='/users' render={ () => <UsersContainer currentUser={this.state.currentUser}/> } />
         </Switch>
+        </Container>
       </div>
     );
   }

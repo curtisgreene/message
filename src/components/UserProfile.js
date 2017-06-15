@@ -3,8 +3,8 @@ import { fetchUser, followUser } from '../api/index'
 import FollowersModal from './FollowersModal'
 import FollowingModal from './FollowingModal'
 import CurrentUserProfile from './CurrentUserProfile'
-import { Link } from 'react-router-dom'
-import { Button, Image, Icon } from 'semantic-ui-react'
+import { Button, Image, Icon, Item } from 'semantic-ui-react'
+import ArticleCard from './ArticleCard'
 export default class UserProfile extends React.Component {
   constructor(props){
     super(props)
@@ -31,19 +31,15 @@ export default class UserProfile extends React.Component {
   }
 
   render(){
-    const currentUser = JSON.parse(localStorage.getItem('user'))
-    if (this.state.user === null) {
-      return null
-    } else if (this.state.user.id === parseInt(currentUser.id)){
+    if (this.props.currentUser === null || this.state.user === null ) {
+      return <h1>Loading the User Profile</h1>
+    } else if (this.state.user.id === this.props.currentUser.id ){
       return (
-        <CurrentUserProfile currentUser={this.state.user} />
+        <CurrentUserProfile handleUpdateUser={this.props.handleUpdateUser} user={this.state.user} />
       )
     } else {
-      const followingList =
-        this.state.user.following.map( person =>
-          <li key={person.id}><Link to={`/users/${person.id}`}>{person.username}</Link></li>
-        )
-      return (
+    const articleCards = this.state.user.articles.map( article => <ArticleCard key={article.id} article={article}/> )
+    return (
         <div>
           <h1>Welcome to the Profile Page!</h1>
           <h3>{this.state.user.username}</h3>
@@ -51,6 +47,9 @@ export default class UserProfile extends React.Component {
           <FollowersModal user={this.state.user}/>
           <FollowingModal user={this.state.user}/>
           <Button type="button" onClick={this.handleFollowUser} primary>Follow</Button>
+          <Item.Group>
+            {articleCards}
+          </Item.Group>
         </div>
       )
     }

@@ -27,6 +27,20 @@ export function fetchUser(id){
   .then( res => res.json() )
 }
 
+export function editUser(user){
+  console.log("attempting to edit from the api/index: ", user)
+  const url = "http://localhost:3000/api/v1/users/" + user.id
+  return fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
+    },
+    method: 'PATCH',
+    body: JSON.stringify( { user: user } )
+  }).then( res => res.json() )
+}
+
 export function fetchArticles() {
   return fetch("http://localhost:3000/api/v1/articles", {
     headers: {
