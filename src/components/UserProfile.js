@@ -1,9 +1,10 @@
 import React from 'react'
-import { fetchUser, followUser } from '../api/index'
+import { fetchUser, followUser, unfollowUser } from '../api/index'
 import FollowersModal from './FollowersModal'
 import FollowingModal from './FollowingModal'
+import FollowButton from './FollowButton'
 import CurrentUserProfile from './CurrentUserProfile'
-import { Button, Image, Icon, Item } from 'semantic-ui-react'
+import { Button, Image, Icon, Item, Loader, Divider, Grid } from 'semantic-ui-react'
 import ArticleCard from './ArticleCard'
 export default class UserProfile extends React.Component {
   constructor(props){
@@ -11,7 +12,6 @@ export default class UserProfile extends React.Component {
     this.state = {
       user: null
     }
-    this.handleFollowUser = this.handleFollowUser.bind(this)
   }
 
   componentDidMount(){
@@ -24,15 +24,14 @@ export default class UserProfile extends React.Component {
     .then( user => this.setState({ user: user }))
   }
 
-  handleFollowUser(){
-    console.log("triyng to follow")
-    followUser(this.state.user.id) //from api/index
-    // .then( user => this.setState({ user: user }))
+  handleFollowOrUnfollow(user){
+    //decides when state updates
+    this.setState({ user: user })
   }
 
   render(){
     if (this.props.currentUser === null || this.state.user === null ) {
-      return <h1>Loading the User Profile</h1>
+      return <Loader active inline='centered'/>
     } else if (this.state.user.id === this.props.currentUser.id ){
       return (
         <CurrentUserProfile handleUpdateUser={this.props.handleUpdateUser} user={this.state.user} />
@@ -41,12 +40,24 @@ export default class UserProfile extends React.Component {
     const articleCards = this.state.user.articles.map( article => <ArticleCard key={article.id} article={article}/> )
     return (
         <div>
-          <h1>Welcome to the Profile Page!</h1>
-          <h3>{this.state.user.username}</h3>
+          <h1>{this.state.user.username}</h1>
           <p>{this.state.user.profile}</p>
-          <FollowersModal user={this.state.user}/>
-          <FollowingModal user={this.state.user}/>
-          <Button type="button" onClick={this.handleFollowUser} primary>Follow</Button>
+          <Grid columns={6} divided>
+            <Grid.Row>
+              <Grid.Column>
+                <FollowersModal user={this.state.user}/>
+              </Grid.Column>
+              <Grid.Column>
+                <FollowingModal user={this.state.user}/>
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>
+                <FollowButton handleChange={this.handleFollowOrUnfollow.bind(this)} currentUser={this.props.currentUser} user={this.state.user} />
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+          <Divider />
           <Item.Group>
             {articleCards}
           </Item.Group>

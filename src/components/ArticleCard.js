@@ -14,8 +14,6 @@ export default class ArticleCard extends React.Component {
     } else {
       const raw = JSON.parse(this.props.article.body)
       const snippet = raw.blocks[0].text.substring(0, 100)
-      // const contentState = convertFromRaw(JSON.parse(this.props.article.body))
-      // const editorState = EditorState.createWithContent(contentState)
     return (
       <Item key={this.props.article.id}>
         <Item.Image size='small' src={require('../assets/missing-image.png')} />

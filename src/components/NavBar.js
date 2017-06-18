@@ -14,7 +14,7 @@ export default class MenuExampleBasic extends Component {
     if (!!localStorage.getItem('jwt')) {
       return (
         <Menu>
-          <Link to="/">
+          <Link to="/articles">
             <Menu.Item
               name='home'
               active={activeItem === 'home'}
@@ -24,7 +24,7 @@ export default class MenuExampleBasic extends Component {
             </Menu.Item>
           </Link>
 
-          <Link to='/new-message'>
+          <Link to='/articles/new'>
             <Menu.Item
               name='Write'
               active={activeItem === 'write'}

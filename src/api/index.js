@@ -28,7 +28,6 @@ export function fetchUser(id){
 }
 
 export function editUser(user){
-  console.log("attempting to edit from the api/index: ", user)
   const url = "http://localhost:3000/api/v1/users/" + user.id
   return fetch(url, {
     headers: {
@@ -63,8 +62,33 @@ export function createArticle(title, body, id){ //needs title
   }).then( res => res.json() )
 }
 
+export function editArticle(title, body, id ){
+  const url = "http://localhost:3000/api/v1/articles/" + id
+  return fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
+    },
+    method: 'PATCH',
+    body: JSON.stringify( {article: {title: title, body: body}} )
+  }).then( res => res.json() )
+}
+
 export function followUser(id){
   const url = "http://localhost:3000/api/v1/follow/" + id
+  return fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
+    },
+    method: 'POST'
+    }).then( res => res.json() )
+}
+
+export function unfollowUser(id){
+  const url = "http://localhost:3000/api/v1/unfollow/" + id
   return fetch(url, {
     headers: {
       'Accept': 'application/json',

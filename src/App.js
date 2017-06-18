@@ -32,7 +32,6 @@ class App extends Component {
       this.setState({ currentUser: res.user })
     })
     .then( () => this.props.history.push('/articles'))
-
   }
 
   componentDidMount(){
@@ -44,6 +43,7 @@ class App extends Component {
 
   handleLogOut(){
     localStorage.clear()
+    this.props.history.push('/')
   }
 
   render() {
@@ -51,12 +51,12 @@ class App extends Component {
       <div>
         <NavBar handleLogOut={this.handleLogOut}/>
         <Container text>
-        <Switch>
-          <Route exact path='/signup' render={ () => <SignUpForm onSignUp={this.handleSignUp}/>} />
-          <Route exact path='/login' render={ () => <LogInForm onLogIn={this.handleLogIn}/>} />
-          <Route path="/articles" render={ () => <ArticlesContainer /> } />
-          <Route path='/users' render={ () => <UsersContainer currentUser={this.state.currentUser}/> } />
-        </Switch>
+          <Switch>
+            <Route exact path='/signup' render={ () => <SignUpForm onSignUp={this.handleSignUp}/>} />
+            <Route exact path='/login' render={ () => <LogInForm onLogIn={this.handleLogIn}/>} />
+            <Route path="/articles" render={ () => <ArticlesContainer currentUser={this.state.currentUser} /> } />
+            <Route path='/users' render={ () => <UsersContainer currentUser={this.state.currentUser}/> } />
+          </Switch>
         </Container>
       </div>
     );

@@ -25,18 +25,16 @@ export default class FollowingModal extends React.Component {
         <a href="#" onClick={this.show('inverted')}>{this.props.user.following.length} following</a>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Header>{this.props.user.username} follows:</Modal.Header>
-          <Modal.Content image>
-            <Image wrapped size='medium' src={require('../assets/missing-image.png')} />
+          <Modal.Content >
             <Modal.Description>
-              <Header>Following:</Header>
               <ul>
                 {followingList}
               </ul>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
-            <Button primary>
-              Proceed <Icon name='right chevron' />
+            <Button onClick={this.close} primary>
+              Close <Icon name='right chevron' />
             </Button>
           </Modal.Actions>
         </Modal>

@@ -1,7 +1,7 @@
 import React from 'react'
 import FollowersModal from './FollowersModal'
 import FollowingModal from './FollowingModal'
-import { Button, Item } from 'semantic-ui-react'
+import { Button, Item, Divider, Grid } from 'semantic-ui-react'
 import ArticleCard from './ArticleCard'
 import UserEditModal from './UserEditModal'
 
@@ -27,12 +27,24 @@ export default class CurrentUserProfile extends React.Component {
     const articleCards = this.props.user.articles.map( article => <ArticleCard key={article.id} article={article}/> )
     return (
       <div>
-        <h1>Welcome to your Profile Page!</h1>
-        <h3>{this.state.user.username}</h3>
+        <h1>{this.state.user.username}</h1>
         <p>{this.state.user.profile}</p>
-        <FollowersModal user={this.props.user}/>
-        <FollowingModal user={this.props.user}/>
-        <UserEditModal onEdit={this.onEdit.bind(this)} handleUpdateUser={this.props.handleUpdateUser} user={this.props.user} />
+        <Grid columns={6} divided>
+          <Grid.Row>
+            <Grid.Column>
+              <FollowersModal user={this.props.user}/>
+            </Grid.Column>
+            <Grid.Column>
+              <FollowingModal user={this.props.user}/>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column>
+              <UserEditModal onEdit={this.onEdit.bind(this)} handleUpdateUser={this.props.handleUpdateUser} user={this.props.user} />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <Divider />
         <Item.Group>
           {articleCards}
         </Item.Group>
