@@ -1,11 +1,11 @@
 import React from 'react';
-import { Input, Container } from 'semantic-ui-react'
+import { Input, Container, Button, Icon, Form, Message, Grid } from 'semantic-ui-react'
 
 export default class LogInForm extends React.Component {
   constructor(){
     super()
     this.state = {
-      username: '',
+      accountName: '',
       password: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -17,18 +17,32 @@ export default class LogInForm extends React.Component {
     })
   }
 
-  handleSubmit(){
+  handleSubmit(e){
+    e.preventDefault()
     this.props.onLogIn(this.state)
   }
 
   render(){
     return(
       <Container text>
-        <label>Create a username: </label>
-        <Input icon="add user" value={this.state.username} onChange={ e => this.handleChange('username', e.target.value)} placeholder="Username"/><br/>
-        <label>Password: </label>
-        <Input type="password" placeholder="Password" value={this.state.password} onChange={ e => this.handleChange('password', e.target.value)} />
-        <input onClick={this.handleSubmit} type="submit" content="Log In"></input>
+        <Grid columns={1}>
+          <Grid.Row centered={true} width='8'>
+            <Message
+              attached
+              header='This is Message'
+              content='Please login below to send your message'
+            />
+            <Form className='attached fluid segment'>
+              <Form.Group widths='equal'>
+                <Form.Input label='Account Name'icon="add user" value={this.state.accountName} onChange={ e => this.handleChange('accountName', e.target.value)} placeholder="Account Name"/><br/>
+                <Form.Input label='Password' type="password" placeholder="Password" value={this.state.password} onChange={ e => this.handleChange('password', e.target.value)} />
+              </Form.Group>
+            <Form.Button onClick={this.handleSubmit.bind(this)} primary>
+              Login<Icon name='right chevron' />
+            </Form.Button>
+            </Form>
+        </Grid.Row>
+      </Grid>
       </Container>
     )
   }

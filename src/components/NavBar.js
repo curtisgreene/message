@@ -35,7 +35,8 @@ export default class MenuExampleBasic extends Component {
           </Link>
           <Link to={`/users/${currentUser.id}`}>
             <Menu.Item
-              name='Write'
+              position='right'
+              name='Profile'
               active={activeItem === 'profile'}
               onClick={this.handleItemClick}
             >
@@ -43,6 +44,7 @@ export default class MenuExampleBasic extends Component {
             </Menu.Item>
           </Link>
           <Menu.Item
+            position='right'
             name='logout'
             active={activeItem === 'logout'}
             onClick={this.props.handleLogOut}
