@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Item } from 'semantic-ui-react'
+import { Item, Image } from 'semantic-ui-react'
 import {convertFromRaw,
         Editor,
         EditorState,
@@ -19,7 +19,7 @@ export default class ArticleCard extends React.Component {
         <Item.Image size='small' src={require('../assets/missing-image.png')} />
         <Item.Content>
           <Link to={`/articles/${this.props.article.id}`}><Item.Header as='a'>{this.props.article.title}</Item.Header></Link><br/>
-          <Link to={`/users/${this.props.article.user.id}`}><Item.Header as='a'>{this.props.article.user.username}</Item.Header></Link>
+          <Link to={`/users/${this.props.article.user.id}`}><Item.Header as='a'><Image src={this.props.article.user.url} avatar/>{this.props.article.user.username}</Item.Header></Link>
           <Item.Description>
             {snippet}...
           </Item.Description>

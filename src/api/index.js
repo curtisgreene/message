@@ -11,6 +11,7 @@ export function createAccount(params) {
 
 
 export function logIn(params){
+  console.log(params)
   return fetch("http://localhost:3000/api/v1/auth", {
     headers: {
       'Accept': 'application/json',
@@ -28,6 +29,7 @@ export function fetchUser(id){
 }
 
 export function editUser(user){
+  // console.log(user)
   const url = "http://localhost:3000/api/v1/users/" + user.id
   return fetch(url, {
     headers: {

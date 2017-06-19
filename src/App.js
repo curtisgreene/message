@@ -27,11 +27,21 @@ class App extends Component {
   handleLogIn(params) {
     logIn(params)
     .then( res => {
-      localStorage.setItem('jwt', res.token)
-      localStorage.setItem('user', JSON.stringify(res.user))
-      this.setState({ currentUser: res.user })
+      if (!!res.error) {
+        alert("Username or password incorrect.")
+        this.props.history.push('/login')
+      }
+      else {
+        localStorage.setItem('jwt', res.token)
+        localStorage.setItem('user', JSON.stringify(res.user))
+        this.setState({ currentUser: res.user })
+      }
     })
-    .then( () => this.props.history.push('/articles'))
+    .then( () => {
+      if (!!localStorage.getItem('jwt')) {
+        this.props.history.push('/articles')
+      }
+    })
   }
 
   componentDidMount(){

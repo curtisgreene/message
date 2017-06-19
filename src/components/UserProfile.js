@@ -16,6 +16,7 @@ export default class UserProfile extends React.Component {
 
   componentDidMount(){
     fetchUser(this.props.user_id)
+    // .then( res => console.log(res))
     .then( user => this.setState({ user: user }))
   }
 
@@ -40,9 +41,16 @@ export default class UserProfile extends React.Component {
     const articleCards = this.state.user.articles.map( article => <ArticleCard key={article.id} article={article}/> )
     return (
         <div>
-          <h1>{this.state.user.username}</h1>
-          <p>{this.state.user.profile}</p>
           <Grid columns={6} divided>
+            <Grid.Row>
+              <Grid.Column width='12'>
+                <h1>{this.state.user.username}</h1>
+                <p>{this.state.user.profile}</p>
+              </Grid.Column>
+              <Grid.Column>
+                <Image src={this.state.user.url} shape='circular'/>
+              </Grid.Column>
+            </Grid.Row>
             <Grid.Row>
               <Grid.Column>
                 <FollowersModal user={this.state.user}/>
