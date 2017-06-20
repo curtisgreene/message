@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, withRouter } from 'react-router-dom'
 import { fetchArticles, createArticle, editArticle } from '../api/index'
 import ArticleShow from '../components/ArticleShow'
 import ArticlesList from '../components/ArticlesList'
@@ -26,7 +26,7 @@ class ArticlesContainer extends React.Component {
 
   handleCreateArticle(title, body, id){
     createArticle(title, body, id)
-    .then( () => this.props.history.push('/'))
+    .then( () => this.props.history.push('/articles'))
   }
 
   handleEditArticle(title, body, id){
@@ -61,4 +61,4 @@ class ArticlesContainer extends React.Component {
 }
 
 
-export default ArticlesContainer
+export default withRouter(ArticlesContainer)

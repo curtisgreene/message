@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Popup, Button, Header, Image, Modal, Icon } from 'semantic-ui-react'
+import { Popup, Button, Header, Image, Modal, Icon, List } from 'semantic-ui-react'
 
 export default class FollowingModal extends React.Component {
   constructor(){
@@ -17,7 +17,13 @@ export default class FollowingModal extends React.Component {
     const { open, dimmer } = this.state
     const followingList =
       this.props.user.following.map( person =>
-        <li onClick={this.close} key={person.id}><Link to={`/users/${person.id}`}>{person.username}</Link></li>
+        <List.Item key={person.id} onClick={this.close}>
+          <Image avatar src={person.url} />
+          <List.Content>
+            <Link to={`/users/${person.id}`}><List.Header as='a'>{person.username}</List.Header></Link>
+            <List.Description>{person.profile}</List.Description>
+          </List.Content>
+        </List.Item>
       )
     return (
 
@@ -27,9 +33,9 @@ export default class FollowingModal extends React.Component {
           <Modal.Header>{this.props.user.username} follows:</Modal.Header>
           <Modal.Content >
             <Modal.Description>
-              <ul>
+              <List>
                 {followingList}
-              </ul>
+              </List>
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
