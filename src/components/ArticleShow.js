@@ -1,8 +1,8 @@
 import React from 'react'
 import {convertFromRaw,
-        Editor,
-        EditorState,
-        createWithContent } from 'draft-js'
+        createWithContent,
+        EditorState } from 'draft-js'
+import { Editor } from 'medium-draft'
 import { Link } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 import ArticleEditForm from './ArticleEditForm'
@@ -18,6 +18,7 @@ export default class ArticleShow extends React.Component {
     }
     this.onSubmit = this.onSubmit.bind(this)
   }
+  debugger
 
   onSubmit( title, raw, id ) {
     this.props.handleEditArticle( title, raw, id )
@@ -25,6 +26,12 @@ export default class ArticleShow extends React.Component {
       title: title,
       body: raw
     })
+  }
+
+  handleChange(prop, value) {
+    this.setState({
+      [prop]: value
+    });
   }
 
   render() {
@@ -37,8 +44,7 @@ export default class ArticleShow extends React.Component {
         <div>
           <h1>{this.state.title}</h1>
           <Link to={`/users/${this.props.article.user.id}`}><h1>{this.state.user.username}</h1></Link>
-          <Editor editorState={editorState} readOnly="true" />
-          {/* <ArticleEditForm editorState={editorState} handleEditArticle={this.onSubmit} id={this.props.article.id} title={this.state.title} body={this.state.body} /> */}
+          <Editor editorState={editorState} editorEnabled={false} onChange={this.handleChange.bind(this)} />
           <ArticleEditModal editorState={editorState} handleEditArticle={this.onSubmit} id={this.props.article.id} title={this.state.title} body={this.state.body} />
         </div>
     )} else {
@@ -48,7 +54,7 @@ export default class ArticleShow extends React.Component {
       <div>
         <h1>{this.state.title}</h1>
         <Link to={`/users/${this.props.article.user.id}`}><h1>{this.state.user.username}</h1></Link>
-        <Editor editorState={editorState} readOnly="true" />
+        <Editor onChange={this.handleChange.bind(this)} editorState={editorState} editorEnabled={false} />
       </div>
     )}
   }

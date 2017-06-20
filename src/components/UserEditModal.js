@@ -49,6 +49,7 @@ export default class UserEditModal extends React.Component {
       }
 
       if (response.body.secure_url !== "") {
+        console.log(response)
         this.setState({
           uploadedFileCloudinaryUrl: response.body.secure_url
         });

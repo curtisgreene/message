@@ -4,6 +4,12 @@
   "private": true,
   "dependencies": {
     "draft-js": "^0.10.1",
+    "draft-js-alignment-plugin": "^2.0.0-rc2",
+    "draft-js-drag-n-drop-plugin": "^2.0.0-rc2",
+    "draft-js-focus-plugin": "^2.0.0-rc2",
+    "draft-js-image-plugin": "^2.0.0-rc2",
+    "draft-js-plugins-editor": "^2.0.0-rc2",
+    "draft-js-resizeable-plugin": "^2.0.0-rc2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-dropzone": "^3.13.2",
