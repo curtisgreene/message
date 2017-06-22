@@ -7,7 +7,9 @@ class UserSerializer < ActiveModel::Serializer
     object.followers.map do |follower|
       {
       username: follower.username,
-      id: follower.id
+      id: follower.id,
+      profile: follower.profile,
+      url: follower.url
     }
     end
   end
@@ -16,7 +18,9 @@ class UserSerializer < ActiveModel::Serializer
     object.following.map do |person|
       {
       username: person.username,
-      id: person.id
+      id: person.id,
+      profile: person.profile,
+      url: person.url
     }
     end
   end

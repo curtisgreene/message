@@ -6,6 +6,7 @@ class Api::V1::ArticlesController < ApplicationController
     current_user = User.find_by(account_id: @current_account.id)
     following_ids = current_user.following_ids.push(current_user.id)
     articles = Article.where(user_id: following_ids)
+    # articles = Article.all
     render json: articles
   end
 
@@ -18,6 +19,12 @@ class Api::V1::ArticlesController < ApplicationController
     article = Article.find(params[:id])
     article.update(article_params)
     render json: article, root: nil
+  end
+
+  def destroy
+    article = Article.find(params[:id])
+    article.delete
+    render json: article
   end
 
 
