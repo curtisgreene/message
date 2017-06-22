@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-import { fetchArticles, createArticle, editArticle } from '../api/index'
+import { fetchArticles, createArticle, editArticle, deleteArticle } from '../api/index'
 import ArticleShow from '../components/ArticleShow'
 import ArticlesList from '../components/ArticlesList'
 import NewArticleForm from '../components/NewArticleForm'
@@ -15,6 +15,7 @@ class ArticlesContainer extends React.Component {
     }
     this.handleCreateArticle = this.handleCreateArticle.bind(this)
     this.handleEditArticle = this.handleEditArticle.bind(this)
+    this.handleDeleteArticle = this.handleDeleteArticle.bind(this)
   }
 
   componentDidMount(){
@@ -34,6 +35,11 @@ class ArticlesContainer extends React.Component {
     .then( res => console.log("response from the server: ", res) )
   }
 
+  handleDeleteArticle(id){
+    deleteArticle(id)
+      .then( () => this.props.history.goBack())
+  }
+
   render(){
     if (!this.state.articles) {
       return <Loader active inline='centered'/>
@@ -46,7 +52,7 @@ class ArticlesContainer extends React.Component {
           <Route exact path="/articles" render={ () => <ArticlesList articles={feedArticles} />} />
           <Route exact path="/articles/:id" render={ ({match}) => {
             const article = this.state.articles.find(article => article.id === parseInt(match.params.id))
-              return <ArticleShow handleEditArticle={this.handleEditArticle} article={article} />
+              return <ArticleShow handleDeleteArticle={this.handleDeleteArticle} handleEditArticle={this.handleEditArticle} article={article} />
             }
           }/>
           <Route exact path="/articles/:id/edit" render={ ({match}) => {

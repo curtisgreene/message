@@ -4,10 +4,11 @@ import SignUpForm from "./components/SignUpForm";
 import { createAccount, logIn, fetchUser } from "./api/index";
 import ArticlesContainer from "./containers/ArticlesContainer";
 import UsersContainer from "./containers/UsersContainer";
+import CustomImageEditor from "./components/staging/CustomImageEditor";
 import NavBar from "./components/NavBar";
 import LogInForm from "./components/LogInForm";
 import { Container } from "semantic-ui-react";
-
+import "./App.css";
 class App extends Component {
   constructor() {
     super();
@@ -20,10 +21,17 @@ class App extends Component {
   }
 
   handleSignUp(params) {
-    createAccount(params).then(res => console.log("res from API: ", res));
+    console.log(params);
+    createAccount(params).then(() =>
+      this.handleLogIn({
+        accountName: params.account.username,
+        password: params.account.password
+      })
+    );
   }
 
   handleLogIn(params) {
+    console.log(params);
     logIn(params)
       .then(res => {
         if (!!res.error) {
@@ -61,30 +69,29 @@ class App extends Component {
     return (
       <div>
         <NavBar handleLogOut={this.handleLogOut} />
-        <Container text>
-          <Switch>
-            <Route
-              exact
-              path="/signup"
-              render={() => <SignUpForm onSignUp={this.handleSignUp} />}
-            />
-            <Route
-              exact
-              path="/login"
-              render={() => <LogInForm onLogIn={this.handleLogIn} />}
-            />
-            <Route
-              path="/articles"
-              render={() =>
-                <ArticlesContainer currentUser={this.state.currentUser} />}
-            />
-            <Route
-              path="/users"
-              render={() =>
-                <UsersContainer currentUser={this.state.currentUser} />}
-            />
-          </Switch>
-        </Container>
+        <Switch>
+          <Route
+            exact
+            path="/signup"
+            render={() => <SignUpForm onSignUp={this.handleSignUp} />}
+          />
+          <Route
+            exact
+            path="/login"
+            render={() => <LogInForm onLogIn={this.handleLogIn} />}
+          />
+          <Route
+            path="/articles"
+            render={() =>
+              <ArticlesContainer currentUser={this.state.currentUser} />}
+          />
+          <Route
+            path="/users"
+            render={() =>
+              <UsersContainer currentUser={this.state.currentUser} />}
+          />
+          <Route path="/staging" render={() => <CustomImageEditor />} />
+        </Switch>
       </div>
     );
   }
