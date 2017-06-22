@@ -100,3 +100,14 @@ export function unfollowUser(id){
     method: 'POST'
     }).then( res => res.json() )
 }
+
+export function deleteArticle(id){
+  return fetch(`http://localhost:3000/api/v1/articles/${id}`, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': localStorage.getItem('jwt')
+    },
+    method: 'DELETE'})
+    .then( res => res.json() )
+}

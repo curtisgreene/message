@@ -11,7 +11,8 @@ import {
   Item,
   Loader,
   Divider,
-  Grid
+  Grid,
+  Container
 } from "semantic-ui-react";
 import ArticleCard from "./ArticleCard";
 export default class UserProfile extends React.Component {
@@ -53,38 +54,46 @@ export default class UserProfile extends React.Component {
       );
       return (
         <div>
-          <Grid columns={6} divided>
-            <Grid.Row>
-              <Grid.Column width="12">
-                <h1>{this.state.user.username}</h1>
-                <p>{this.state.user.profile}</p>
-              </Grid.Column>
-              <Grid.Column>
-                <Image src={this.state.user.url} shape="circular" />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column>
-                <FollowersModal user={this.state.user} />
-              </Grid.Column>
-              <Grid.Column>
-                <FollowingModal user={this.state.user} />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column>
-                <FollowButton
-                  handleChange={this.handleFollowOrUnfollow.bind(this)}
-                  currentUser={this.props.currentUser}
-                  user={this.state.user}
-                />
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-          <Divider />
-          <Item.Group>
-            {articleCards}
-          </Item.Group>
+          <Container text>
+            <div className='profileUpper'>
+            <Grid columns={6} divided >
+              <Grid.Row>
+                <Grid.Column width="12">
+                  <h1>{this.state.user.username}</h1>
+                  <p>{this.state.user.profile}</p>
+                </Grid.Column>
+                <Grid.Column>
+                  <Image src={this.state.user.url} shape="circular" />
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column>
+                  <FollowersModal user={this.state.user} />
+                </Grid.Column>
+                <Grid.Column>
+                  <FollowingModal user={this.state.user} />
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Grid.Column>
+                  <FollowButton
+                    handleChange={this.handleFollowOrUnfollow.bind(this)}
+                    currentUser={this.props.currentUser}
+                    user={this.state.user}
+                  />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+            </div>
+            <Divider fitted/>
+          </Container>
+          <div className="articleList">
+            <Container text>
+              <Item.Group divided className='articleCard'>
+                {articleCards}
+              </Item.Group>
+            </Container>
+          </div>
         </div>
       );
     }
