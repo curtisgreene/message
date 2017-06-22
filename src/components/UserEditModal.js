@@ -26,7 +26,7 @@ export default class UserEditModal extends React.Component {
       username: props.user.username,
       profile: props.user.profile,
       open: false,
-      uploadedFileCloudinaryUrl: ""
+      uploadedFileCloudinaryUrl: props.user.url
     };
   }
 
@@ -63,17 +63,31 @@ export default class UserEditModal extends React.Component {
   handleSubmit(event) {
     //optimistically updates the CurrentUserProfile on edit submit
     event.preventDefault();
-    this.props.handleUpdateUser({
-      id: this.state.id,
-      username: this.state.username,
-      profile: this.state.profile,
-      url: this.state.uploadedFileCloudinaryUrl
-    });
-    this.props.onEdit({
-      username: this.state.username,
-      profile: this.state.profile,
-      url: this.state.uploadedFileCloudinaryUrl
-    });
+    if (this.state.uploadedFileCloudinaryUrl !== "") {
+      this.props.handleUpdateUser({
+        id: this.state.id,
+        username: this.state.username,
+        profile: this.state.profile,
+        url: this.state.uploadedFileCloudinaryUrl
+      });
+      this.props.onEdit({
+        username: this.state.username,
+        profile: this.state.profile,
+        url: this.state.uploadedFileCloudinaryUrl
+      })
+      console.log("sending with url:", this.state)
+    } else {
+      this.props.handleUpdateUser({
+        id: this.state.id,
+        username: this.state.username,
+        profile: this.state.profile,
+      });
+      this.props.onEdit({
+        username: this.state.username,
+        profile: this.state.profile,
+      })
+      console.log("sending without url:", this.state)
+    }
     this.close();
   }
   show = dimmer => () => this.setState({ dimmer, open: true });
@@ -116,7 +130,9 @@ export default class UserEditModal extends React.Component {
                 <p>Drop an image or click to select a file to upload.</p>
               </Dropzone>
               <div>
-                {this.state.uploadedFileCloudinaryUrl === "" ? null : <div>
+                {this.state.uploadedFileCloudinaryUrl === this.props.user.url
+                  ? null
+                  : <div>
                       <p>{this.state.uploadedFile.name}</p>
                       <img src={this.state.uploadedFileCloudinaryUrl} />
                     </div>}
