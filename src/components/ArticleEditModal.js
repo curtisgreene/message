@@ -130,7 +130,7 @@ export default class ArticleEditModal extends React.Component {
               color="red"
               onClick={this.handleDelete.bind(this)}
             >
-              <Icon name="left chevron" />
+              <Icon name="delete" />
               Delete
             </Button>
             <Button onClick={this.handleSubmit.bind(this)} primary>

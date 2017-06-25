@@ -60,7 +60,7 @@ export default class ArticleShow extends React.Component {
               </Header>
             </Container>
           </div>
-          <div>
+
             <Container text>
               <Header as="h1" textAlign="center">
                 {this.state.title}
@@ -70,6 +70,7 @@ export default class ArticleShow extends React.Component {
                 editorEnabled={false}
                 onChange={this.handleChange.bind(this)}
               />
+              <div className='editButton'>
               <ArticleEditModal
                 editorState={editorState}
                 handleEditArticle={this.onSubmit}
@@ -78,8 +79,9 @@ export default class ArticleShow extends React.Component {
                 body={this.state.body}
                 handleDeleteArticle={this.props.handleDeleteArticle}
               />
+            </div>
             </Container>
-          </div>
+
         </div>
       );
     } else {

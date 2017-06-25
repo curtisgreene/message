@@ -97,7 +97,7 @@ export default class UserEditModal extends React.Component {
     const { username, profile } = this.state;
     return (
       <div>
-        <Button onClick={this.show("inverted")}>Edit</Button>
+        <Button primary onClick={this.show("inverted")}>Edit</Button>
         <Modal dimmer={dimmer} open={open} onClose={this.close}>
           <Modal.Content image>
             <Modal.Description>
@@ -140,6 +140,14 @@ export default class UserEditModal extends React.Component {
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
+            <Button
+              floated="left"
+              color="red"
+              onClick={this.close}
+            >
+              <Icon name="delete" />
+              Cancel
+            </Button>
             <Button onClick={this.handleSubmit.bind(this)} primary>
               Edit <Icon name="right chevron" />
             </Button>

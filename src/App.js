@@ -62,7 +62,7 @@ class App extends Component {
 
   handleLogOut() {
     localStorage.clear();
-    this.props.history.push("/");
+    this.props.history.push("/login");
   }
 
   render() {
