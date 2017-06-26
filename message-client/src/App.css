@@ -1,0 +1,20 @@
+.articleList {
+  background-color: #FAFAFA;
+}
+
+.articleCard {
+  background-color: white;
+  padding: .5cm;
+}
+
+.profileUpper, .article-feed-header {
+  padding: .5cm;
+}
+
+.authorPreview {
+  padding: 1.5cm;
+}
+
+.editButton {
+  padding: 1cm;
+}
