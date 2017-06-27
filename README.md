@@ -2,7 +2,7 @@
 
 Message is a blogging platform designed in the spirit of Medium.com. My goal was to create an easy to use and visually pleasing product, that looks and feels exactly like how a user would expect. The result is an intuitive and visually consistent platform.
 
-<iframe src="https://giphy.com/embed/3ohrynpkyPjfVyiOeA" width="480" height="264" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/message-react-curtis-greene-3ohrynpkyPjfVyiOeA">via GIPHY</a></p>
+![Message Demo](https://media.giphy.com/media/3ohrynpkyPjfVyiOeA/giphy.gif)
 
 ### Frontend
 
