@@ -2,6 +2,8 @@
 
 Message is a blogging platform designed in the spirit of Medium.com. My goal was to create an easy to use and visually pleasing product, that looks and feels exactly like how a user would expect. The result is an intuitive and visually consistent platform.
 
+<iframe src="https://giphy.com/embed/3ohrynpkyPjfVyiOeA" width="480" height="264" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/message-react-curtis-greene-3ohrynpkyPjfVyiOeA">via GIPHY</a></p>
+
 ### Frontend
 
 The client side of Message is built with React and styled with Semantic UI. I chose Semantic because of its clean look, excellent documentation, and how easy their React integration is to use.
@@ -21,3 +23,7 @@ I'm handling authentication by using several different tools in my Rails backend
 ### Images
 
 Uploading images for both articles and user profile pictures was another interesting challenge. Rather than saving images in my Postgres database with Paperclip and ImageMagick (a popular solution), I wanted to try a different route. The images are stored by a third-party storage system called Cloudinary. I am using Dropzone for drag and drop functionality and superagent to send the file to Cloudinary. Cloudinary's response includes a URL which is getting stored in my database.
+
+### What Next
+
+In the future, I would implement Message with Redux from the very beginning. The best way to learn the value of managing state with Redux is to build a complex React application. I have several instances where I am passing state downward multiple levels, where it would be much easier to simply connect the necessary components directly to the store.
