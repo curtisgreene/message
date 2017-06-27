@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "draft-convert": "^1.4.7",
     "draft-js": "^0.10.1",
     "draft-js-alignment-plugin": "^2.0.0-rc2",
     "draft-js-drag-n-drop-plugin": "^2.0.0-rc2",
@@ -10,6 +11,7 @@
     "draft-js-image-plugin": "^2.0.0-rc2",
     "draft-js-plugins-editor": "^2.0.0-rc2",
     "draft-js-resizeable-plugin": "^2.0.0-rc2",
+    "medium-draft": "^0.5.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-dropzone": "^3.13.2",
