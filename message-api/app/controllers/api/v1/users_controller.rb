@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 
-  # before_action :authorize_account!
+  before_action :authorize_account!, only: [:new_follow, :unfollow]
 
 
   def index
@@ -25,7 +25,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def new_follow
-    authorize_account!
     to_be_followed = User.find(params[:id])
     current_user = User.find_by(account_id: @current_account.id)
     current_user.follow(to_be_followed)
@@ -33,7 +32,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def unfollow
-    authorize_account!
     to_be_unfollowed = User.find(params[:id])
     current_user = User.find_by(account_id: @current_account.id)
     current_user.unfollow(to_be_unfollowed)
